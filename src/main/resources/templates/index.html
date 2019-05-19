@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+</head>
+<body>
+    <div th:if="${not #lists.isEmpty(movies)}">
+        <h2>Movies</h2>
+        <div class="single-movie" th:each="movie : ${movies}">
+            <img th:src="@{${'/images/' + movie.title + '.jpg'}}"/>
+            <div class="single-movie_details">
+                <h3>
+                    <a th:text="${movie.title}" href="movie.html" th:href="@{|/movies/${movie.id}|}"></a>
+                </h3>
+                <h4 th:text="'Age Rating: ' + ${movie.ageRating}"></h4>
+                <h4 th:text="'Likes: ' + ${movie.likes}"></h4>
+                <p th:text="${movie.description}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-commenter" th:if="${topCommenter != null}">
+        <h3>Top commenter of all time</h3>
+        <p th:text="${topCommenter}"></p>
+    </div>
+
+    <div class="most-likes" th:if="${movieWithMostLikes != null}">
+        <h3>Movie with most likes</h3>
+        <p th:text="${movieWithMostLikes}"></p>
+    </div>
+</body>
+</html>
