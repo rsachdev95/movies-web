@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.title}"></title>
+</head>
+<body>
+    <h2 th:text="${movie.title}"></h2>
+    <p th:text="${movie.description}"></p>
+    <p th:text="${movie.producer}"></p>
+    <p th:text="${movie.availableIn3d}"></p>
+    <p th:text="${movie.ageRating}"></p>
+    <p th:text="${movie.likes}"></p>
+    <div th:if="${not #lists.isEmpty(movie.comments)}">
+        <h4>Comments</h4>
+        <table>
+            <tr th:each="comment: ${movie.comments} ">
+                <td th:text="${comment.user}"></td>
+                <td th:text="${comment.message}"></td>
+                <td th:text="${#dates.format(comment.dateCreated * 1000, 'yyyy-MM-dd')}"></td>
+                <td th:text="${comment.like}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
