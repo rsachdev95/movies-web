@@ -3,24 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${movie.title}"></title>
+    <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
-    <h2 th:text="${movie.title}"></h2>
-    <p th:text="${movie.description}"></p>
-    <p th:text="${movie.producer}"></p>
-    <p th:text="${movie.availableIn3d}"></p>
-    <p th:text="${movie.ageRating}"></p>
-    <p th:text="${movie.likes}"></p>
+    <div class="movie-details">
+        <div class="left-section">
+            <img th:src="@{${'/images/' + movie.title + '.jpg'}}"/>
+        </div>
+        <div class="right-section">
+            <h2 th:text="${movie.title}"></h2>
+            <p class="purple" th:text="'Likes: ' + ${movie.likes}"></p>
+            <p class="purple" th:text="'Age Rating: ' + ${movie.ageRating}"></p>
+            <p class="purple" th:text="'Producer: ' + ${movie.producer}"></p>
+            <p class="purple" th:text="'3D Available: ' + ${movie.availableIn3d}"></p>
+            <p class="purple" th:text="${movie.description}"></p>
+        </div>
+    </div>
+
+
     <div th:if="${not #lists.isEmpty(movie.comments)}">
-        <h4>Comments</h4>
-        <table>
-            <tr th:each="comment: ${movie.comments} ">
-                <td th:text="${comment.user}"></td>
-                <td th:text="${comment.message}"></td>
-                <td th:text="${#dates.format(comment.dateCreated * 1000, 'yyyy-MM-dd')}"></td>
-                <td th:text="${comment.like}"></td>
-            </tr>
-        </table>
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <div class="comments">
+                <div class="comment" th:each="comment: ${movie.comments}">
+                    <div class="left-section">
+                        <i class="fas fa-user"></i>
+                        <h3 th:text="${comment.user}"></h3>
+                        <p th:text="'Likes: ' + ${comment.like}"></p>
+                    </div>
+                    <div class="right-section">
+                        <p th:text="${#dates.format(comment.dateCreated * 1000, 'yyyy-MM-dd')}"></p>
+                        <p th:text="${comment.message}"></p>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
