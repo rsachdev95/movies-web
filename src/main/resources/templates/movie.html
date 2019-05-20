@@ -16,7 +16,7 @@
             <p class="purple" th:text="'Likes: ' + ${movie.likes}"></p>
             <p class="purple" th:text="'Age Rating: ' + ${movie.ageRating}"></p>
             <p class="purple" th:text="'Producer: ' + ${movie.producer}"></p>
-            <p class="purple" th:text="'3D Available: ' + ${movie.availableIn3d}"></p>
+            <p class="purple" th:if="${movie.availableIn3d == true}">Available in 3-D</p>
             <p class="purple" th:text="${movie.description}"></p>
         </div>
     </div>
