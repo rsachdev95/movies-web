@@ -38,7 +38,7 @@ public class MovieController {
         model.addAttribute("topCommenter", topCommenter);
         model.addAttribute("movieWithMostLikes", movieWithMostLikes);
 
-        return "index";
+        return "movieslist";
     }
 
     @GetMapping("/{movie-id}")
